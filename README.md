@@ -33,5 +33,36 @@
 ### 1. Select all tasks
 ```sql
 SELECT * FROM tasks;
+###2. Update a task’s status
+UPDATE tasks SET status = 'completed' WHERE id = 1;
+###3. Delete a task
+DELETE FROM tasks WHERE id = 7;
+###4. Show tasks with Sorting and Limit (Pagination)
+SELECT * FROM tasks ORDER BY created_at DESC LIMIT 3;
+###5. Aggregator Functions
+-- Count total tasks per user
+SELECT user_id, COUNT(*) AS total_tasks
+FROM tasks
+GROUP BY user_id;
+
+-- Find latest task creation date per user
+SELECT user_id, MAX(created_at) AS latest_task
+FROM tasks
+GROUP BY user_id;
+###6. Joins
+-- Inner Join
+SELECT users.name, tasks.title, tasks.status
+FROM users
+INNER JOIN tasks ON users.id = tasks.user_id;
+
+-- Left Join
+SELECT users.name, tasks.title, tasks.status
+FROM users
+LEFT JOIN tasks ON users.id = tasks.user_id;
+
+-- Right Join
+SELECT users.name, tasks.title, tasks.status
+FROM users
+RIGHT JOIN tasks ON users.id = tasks.user_id;
 
 
